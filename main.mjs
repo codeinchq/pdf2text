@@ -17,6 +17,19 @@ const tempDir = 'temp';
 const app = express();
 const upload = multer({dest: tempDir});
 
+/**
+ * Health check endpoint
+ */
+app.get('/health', (req, res) => {
+    res.json({
+        status: "up",
+        timestamp: new Date().toISOString()
+    });
+});
+
+/**
+ * Extract text from a PDF file
+ */
 app.post('/extract', upload.single('file'), async (req, res) => {
     if (!req.file?.filename) {
         res.status(400);
