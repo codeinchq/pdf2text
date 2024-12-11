@@ -2,7 +2,7 @@
 
 [![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Document%20Cloud-blue)](https://www.codeinc.co)
 [![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/codeinchq/pdf2txt?label=Version&color=red)](https://github.com/codeinchq/pdf2txt/releases/latest)
+[![Docker Image Version](https://img.shields.io/docker/v/codeinchq/pdf2txt?sort=semver&label=Docker%20Hub&color=red)](https://hub.docker.com/r/codeinchq/pdf2txt/tags)
 
 This repository contains a simple containerized API to convert PDF documents to text using [Mozilla's pdf.js](https://mozilla.github.io/pdf.js/) and [pdf.js-extract](https://www.npmjs.com/package/pdf.js-extract).
 
