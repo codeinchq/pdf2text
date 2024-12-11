@@ -1,6 +1,8 @@
 # pdf2txt
 
+[![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Document%20Cloud-blue)](https://www.codeinc.co)
 [![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/codeinchq/pdf2txt?label=Version&color=red)](https://github.com/codeinchq/pdf2txt/releases/latest)
 
 This repository contains a simple containerized API to convert PDF documents to text using [Mozilla's pdf.js](https://mozilla.github.io/pdf.js/) and [pdf.js-extract](https://www.npmjs.com/package/pdf.js-extract).
 
@@ -54,8 +56,7 @@ A health check is available at the `/health` endpoint. The server returns a stat
 
 ## Client
 
-A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/pdf2txt-php-client) and [Packagist](https://packagist.org/packages/codeinc/pdf2txt-client).
-
+A PHP 8 client is available at on [GitHub](https://github.com/codeinchq/document-cloud-php-client) and [Packagist](https://packagist.org/packages/codeinc/document-cloud-client).
 
 ## License
 
