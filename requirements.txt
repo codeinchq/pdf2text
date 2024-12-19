@@ -1,0 +1,5 @@
+fastapi==0.109.1
+uvicorn==0.22.0
+pdfplumber==0.9.0
+python-multipart==0.0.20
+nltk~=3.9.1

@@ -14,14 +14,15 @@ By default, the container listens on port 3000. The port is configurable using t
 
 ## Usage
 
+> [!IMPORTANT]  
+> The v2 parameters are slightly different from those of v1. For more information about the v1 parameters, [see here](https://github.com/codeinchq/pdf2txt/blob/v1.8/README.md#usage).
+
 All requests must by send in POST to the `/extract` endpoint with a `multipart/form-data` content type. The request must contain a PDF file with the key `file`. 
 
 Additional parameters can be sent to customize the conversion process:
-* `firstPage`: The first page to extract. Default is `1`.
-* `lastPage`: The last page to extract. Default is the last page of the document.
+* `first_page`: The first page to extract. Default is `1`.
+* `last_page`: The last page to extract. Default is the last page of the document.
 * `password`: The password to unlock the PDF. Default is none.
-* `normalizeWhitespace`: If set to `true`, the server normalizes the whitespace in the extracted text. Default is `true`.
-* `format`: The output format. Supported values are `text` (the server returns the raw text as `text/plain`) or `json` (the server returns a JSON object as `text/json`). Default is `text`.
 
 The server returns `200` if the conversion was successful and the images are available in the response body. In case of error, the server returns a `400` status code with a JSON object containing the error message (format: `{error: string}`).
 

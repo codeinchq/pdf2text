@@ -1,34 +1,25 @@
-####################################################################################################
-# PDF2TXT
-####################################################################################################
-FROM --platform=$TARGETPLATFORM node:lts-slim AS pdf2txt
+FROM python:3.9-slim
 
-ENV PORT=3000
-ENV NODE_ENV=production
+ARG PORT=5000
+ENV debian_frontend=noninteractive
+ENV PYTHONUNBUFFERED=1
+ENV NLTK_DATA=/usr/share/nltk_data
+
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y \
+    libmagic1 \
+    && rm -rf /var/lib/apt/lists/*
 
-####################################################################################################
-# PDF2TXT dev
-####################################################################################################
-FROM pdf2txt AS pdf2txt-dev
+COPY requirements.txt .
 
-ENV NODE_ENV=development
-RUN npm install --global nodemon
+RUN pip install --no-cache-dir -r requirements.txt && \
+    mkdir -p /usr/share/nltk_data && \
+    python -m nltk.downloader -d $NLTK_DATA punkt_tab
 
-EXPOSE $PORT
-ENTRYPOINT ["nodemon", "main.mjs"]
-
-
-####################################################################################################
-# PDF2TXT prod
-####################################################################################################
-FROM pdf2txt AS pdf2txt-prod
-
-COPY main.mjs /app/
-COPY package.json /app/
-COPY package-lock.json /app/
-RUN npm install --omit=dev
+COPY app.py .
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 EXPOSE $PORT
-ENTRYPOINT ["node", "main.mjs"]
+ENTRYPOINT ["/app/entrypoint.sh"]
