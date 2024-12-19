@@ -1,10 +1,10 @@
 # Pdf2Txt
 
-[![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Document%20Cloud-blue)](https://www.codeinc.co)
+[![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Services%20Cloud-blue)](https://www.codeinc.co)
 [![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
 [![Docker Image Version](https://img.shields.io/docker/v/codeinchq/pdf2txt?sort=semver&label=Docker%20Hub&color=red)](https://hub.docker.com/r/codeinchq/pdf2txt/tags)
 
-This repository contains a simple containerized API to convert PDF documents to text using [Mozilla's pdf.js](https://mozilla.github.io/pdf.js/) and [pdf.js-extract](https://www.npmjs.com/package/pdf.js-extract).
+This repository contains a simple containerized API to convert PDF documents to text using Python [pdfplumber](https://pypi.org/project/pdfplumber/) library. The API is built using [FastAPI](https://fastapi.tiangolo.com/).
 
 The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/pdf2txt) under the name `codeinchq/pdf2txt`.
 
@@ -38,14 +38,10 @@ Convert a PDF file to text with a JSON response:
 ```bash
 curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/extract -o example.json
 ```
-Convert a PDF file to text:
-```bash
-curl -X POST -F "file=@/path/to/file.pdf" http://localhost:3000/extract
-```
 
 Extract a password-protected PDF file's text content as JSON and save it to a file:
 ```bash
-curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" -F "format=json" http://localhost:3000/extract -o example.json
+curl -X POST -F "file=@/path/to/file.pdf" -F "password=XXX" http://localhost:3000/extract -o example.json
 ```
 
 ### Health check
