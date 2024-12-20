@@ -4,19 +4,17 @@ ARG PORT=5000
 ENV debian_frontend=noninteractive
 ENV PYTHONUNBUFFERED=1
 
+# Set the working directory in the container
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    libmagic1 \
-    && rm -rf /var/lib/apt/lists/*
+# Copy the source code to the container
+COPY . .
 
-COPY requirements.txt .
+# Install dependencies
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY app.py .
-COPY entrypoint.sh .
+# Run the application
 RUN chmod +x entrypoint.sh
-
 EXPOSE $PORT
 ENTRYPOINT ["/app/entrypoint.sh"]

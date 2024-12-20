@@ -18,7 +18,6 @@ app = FastAPI()
 async def health():
     return JSONResponse(content={"status": "up", "timestamp": datetime.now().isoformat()})
 
-
 @app.post("/extract", response_model=ExtractResponse)
 async def extract(file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
