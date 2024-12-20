@@ -4,7 +4,7 @@
 [![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
 [![Docker Image Version](https://img.shields.io/docker/v/codeinchq/pdf2txt?sort=semver&label=Docker%20Hub&color=red)](https://hub.docker.com/r/codeinchq/pdf2txt/tags)
 
-This repository contains a simple containerized API to convert PDF documents to text using Python [pdfplumber](https://pypi.org/project/pdfplumber/) library. The API is built using [FastAPI](https://fastapi.tiangolo.com/).
+This repository contains a simple containerized API to convert PDF documents to text using Python [MyMuPDF](https://pymupdf.readthedocs.io/en/latest/) library. The API is built using [FastAPI](https://fastapi.tiangolo.com/).
 
 The image is available on [Docker Hub](https://hub.docker.com/r/codeinchq/pdf2txt) under the name `codeinchq/pdf2txt`.
 

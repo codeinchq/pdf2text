@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
-#  Copyright (c) 2024 Code Inc. - All Rights Reserved
-#  Unauthorized copying of this file, via any medium is strictly prohibited
-#  Proprietary and confidential
-#  Visit <https://www.codeinc.co> for more information
+#  Copyright 2024 Code Inc. <https://www.codeinc.co>
+#
+#  Use of this source code is governed by an MIT-style
+#  license that can be found in the LICENSE file or at
+#  https://opensource.org/licenses/MIT.
 
-import io
-import pdfplumber
-from fastapi import FastAPI, File, UploadFile, HTTPException, Query
+from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import JSONResponse
-from typing import Optional
-import nltk
 from datetime import datetime
+import pymupdf
+from models import ExtractResponse
 
 app = FastAPI()
 
@@ -19,30 +18,29 @@ app = FastAPI()
 async def health():
     return JSONResponse(content={"status": "up", "timestamp": datetime.now().isoformat()})
 
-@app.post("/extract")
-async def extract(
-    file: UploadFile = File(...),
-    tokenize: Optional[bool] = Query(False, description="If true, return sentence tokenization.")
-):
+
+@app.post("/extract", response_model=ExtractResponse)
+async def extract(file: UploadFile = File(...)):
     if file.content_type != "application/pdf":
         raise HTTPException(status_code=400, detail="Uploaded file must be a PDF.")
 
     pdf_bytes = await file.read()
     try:
-        with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        # Open the PDF with PyMuPDF
+        doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
+        print(doc)
+        with doc:
             pages_output = []
-            for page_num, page in enumerate(pdf.pages, start=1):
-                text = page.extract_text() or ""
-                page_dict = {
-                    "page_number": page_num,
-                    "text": text
-                }
-                if tokenize:
-                    # Tokenize text into sentences
-                    sentences = nltk.sent_tokenize(text)
-                    page_dict["sentences"] = sentences
-                pages_output.append(page_dict)
+
+            # Iterate through the pages and extract text
+            i = 1
+            for page in doc:
+                pages_output.append({
+                    "page_number": i,
+                    "text": (page.get_text() or "")
+                })
 
             return {"pages": pages_output}
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
