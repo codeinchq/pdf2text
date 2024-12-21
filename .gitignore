@@ -2,6 +2,7 @@
 /node_modules
 /.venv
 /temp
+/__pycache__
 
 # User-specific stuff
 .idea/**/workspace.xml
