@@ -1,6 +1,6 @@
 # Pdf2Txt
 
-[![Code Inc.](https://img.shields.io/badge/Code%20Inc.-Services%20Cloud-blue)](https://www.codeinc.co)
+[![Code Inc.](https://img.shields.io/badge/Powered%20by-Code%20Inc.-blue)](https://www.codeinc.co)
 [![Docker Image CI](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml/badge.svg)](https://github.com/codeinchq/pdf2txt/actions/workflows/docker-image.yml)
 [![Docker Image Version](https://img.shields.io/docker/v/codeinchq/pdf2txt?sort=semver&label=Docker%20Hub&color=red)](https://hub.docker.com/r/codeinchq/pdf2txt/tags)
 
