@@ -1,7 +1,12 @@
 FROM python:3.11-slim
 
 ARG PORT=5000
-ENV debian_frontend=noninteractive
+ARG BUILD_ID=unknown
+ARG VERSION=unknown
+ENV PORT=$PORT
+ENV BUILD_ID=$BUILD_ID
+ENV VERSION=$VERSION
+ENV DEBIAN_FRONTEND=noninteractive
 ENV PYTHONUNBUFFERED=1
 
 # Set the working directory in the container

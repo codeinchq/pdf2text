@@ -33,6 +33,10 @@ jobs:
         with:
           images: codeinchq/pdf2txt
 
+      - name: Extract tag as version
+        id: extract_version
+        run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
@@ -41,3 +45,6 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            BUILD_ID=${{ github.run_id }}
+            VERSION=${{ env.VERSION }}
